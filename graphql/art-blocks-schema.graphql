@@ -1,0 +1,1620 @@
+# Art Blocks GraphQL API Schema (Hasura)
+# Endpoint: https://data.artblocks.io/v1/graphql
+# Derived from live introspection — confirmed types only.
+
+scalar bigint
+scalar float8
+scalar jsonb
+scalar numeric
+scalar timestamp
+scalar timestamptz
+scalar uuid
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum bid_types_enum {
+  token_set
+  artist_set
+  collection
+}
+
+enum contract_type_names_enum {
+  GenArt721CoreV0
+  GenArt721CoreV1
+  GenArt721CoreV2_PBAB
+  GenArt721CoreV2_PRTNR
+  GenArt721CoreV3
+  GenArt721CoreV3_Engine
+  GenArt721CoreV3_Engine_Flex
+}
+
+enum curation_statuses_enum {
+  curated
+  playground
+  factory
+  collaboration
+  open
+}
+
+enum minter_filter_type_names_enum {
+  MinterFilterV0
+  MinterFilterV1
+  MinterFilterV2
+}
+
+enum minter_type_names_enum {
+  MinterSetPriceV0
+  MinterSetPriceV1
+  MinterSetPriceV2
+  MinterSetPriceV3
+  MinterSetPriceV4
+  MinterSetPriceERC20V0
+  MinterSetPriceERC20V1
+  MinterSetPriceERC20V2
+  MinterSetPriceERC20V3
+  MinterDALinV0
+  MinterDALinV1
+  MinterDALinV2
+  MinterDALinV3
+  MinterDALinV4
+  MinterDALinV5
+  MinterDAExpV0
+  MinterDAExpV1
+  MinterDAExpV2
+  MinterDAExpV3
+  MinterDAExpV4
+  MinterDAExpSettlementV0
+  MinterDAExpSettlementV1
+  MinterDAExpSettlementV2
+  MinterMerkleV0
+  MinterMerkleV1
+  MinterMerkleV2
+  MinterMerkleV3
+  MinterMerkleV4
+  MinterMerkleV5
+  MinterHolderV0
+  MinterHolderV1
+  MinterHolderV2
+  MinterHolderV3
+  MinterHolderV4
+  MinterPolyptychV0
+  MinterRAMV0
+  MinterSEAV0
+}
+
+enum partner_tags_enum {
+  flagship
+  engine
+  flex
+}
+
+enum partner_types_enum {
+  artblocks
+  engine
+  collaboration
+}
+
+enum render_types_enum {
+  image
+  video
+  animated_gif
+  three_dimensional
+}
+
+enum renderer_resource_types_enum {
+  script
+  image
+  video
+  three_dimensional
+}
+
+enum tag_groupings_enum {
+  style
+  subject
+  medium
+  theme
+}
+
+enum tag_status_enum {
+  active
+  deprecated
+}
+
+enum tag_types_enum {
+  project
+  user
+  contract
+}
+
+enum verticals_enum {
+  artblocks
+  curated
+  presents
+  collaborations
+  explorations
+  heritage
+}
+
+enum order_by {
+  asc
+  asc_nulls_first
+  asc_nulls_last
+  desc
+  desc_nulls_first
+  desc_nulls_last
+}
+
+# ─────────────────────────────────────────────
+# Core object types
+# ─────────────────────────────────────────────
+
+type projects_metadata {
+  id: String!
+  project_id: String!
+  collection_uuid: uuid!
+  slug: String!
+  name: String
+  description: String
+  artist_name: String
+  artist_address: String!
+  artist: users!
+  contract_address: String!
+  contract: contracts_metadata!
+  chain_id: Int!
+  chain: chains
+  vertical_name: String!
+  vertical: project_verticals!
+  curation_status: curation_statuses_enum!
+  curation_status_display: String
+  curation_status_override: curation_statuses_enum
+  active: Boolean!
+  paused: Boolean!
+  complete: Boolean!
+  locked: Boolean
+  max_invocations: Int!
+  invocations: bigint
+  aspect_ratio: numeric!
+  script: String
+  script_count: bigint
+  script_json: jsonb
+  script_type_and_version: String
+  script_type_and_version_override: String
+  dependency_name_and_version: String
+  dependency: dependencies_metadata
+  license: String
+  link_to_license: String
+  website: String
+  external_asset_dependency_count: bigint
+  external_asset_dependencies_locked: Boolean
+  ipfs_hash: String
+  base_uri: String
+  preview_render_type: render_types_enum!
+  primary_render_type: render_types_enum!
+  renderer_resource_type: renderer_resource_types_enum!
+  display_static: Boolean!
+  disable_auto_image_format: Boolean
+  disable_sample_generator: Boolean!
+  generate_video_assets: Boolean!
+  canvas_mode: Boolean
+  render_complete: Boolean
+  render_delay: Int
+  render_with_gpu: Boolean
+  video_aspect_ratio: numeric
+  video_duration: Int
+  video_fps: Int
+  video_render_delay: Int
+  start_datetime: timestamptz
+  activated_at: timestamptz
+  completed_at: timestamptz
+  first_token_minted_at: timestamptz
+  second_token_minted_at: timestamptz
+  updated_at: timestamp
+  properties_updated_at: jsonb!
+  lowest_listing: float8
+  price_per_token_in_wei: String
+  currency_address: String
+  currency_symbol: String
+  currency_decimals: Int
+  royalty_percentage: Int
+  render_provider_secondary_sales_address: String
+  render_provider_secondary_sales_bps: Int
+  engine_platform_provider_secondary_sales_address: String
+  engine_platform_provider_secondary_sales_bps: Int
+  additional_payee: String
+  additional_payee_percentage: Int
+  additional_payee_secondary_sales_address: String
+  additional_payee_secondary_sales_percentage: Int
+  proposed_artists_and_splits_id: String
+  minter_configuration_id: String
+  minter_configuration: project_minter_configurations
+  series_id: Int
+  series: project_series
+  auction_start_time: timestamptz
+  auction_end_time: timestamptz
+  artist_display_notes: String
+  artist_featured_token_id: String
+  artist_interview: String
+  charitable_giving_details: String
+  creative_credit: String
+  sales_notes: String
+  heritage_curation_status: String
+  opensea_slug: String
+  is_artblocks: Boolean
+  read_only_addresses: jsonb
+  favorited_by_user: Boolean
+  tokens: [tokens_metadata!]!
+  tokens_aggregate: tokens_metadata_aggregate!
+  featured_token: [tokens_metadata!]
+  random_token: [tokens_metadata!]
+  bids: [bids_metadata!]!
+  bids_aggregate: bids_metadata_aggregate!
+  favorites: [favorites!]!
+  favorites_aggregate: favorites_aggregate!
+  receipts: [receipt_metadata!]!
+  receipts_aggregate: receipt_metadata_aggregate!
+  scripts: [project_scripts!]!
+  external_asset_dependencies: [project_external_asset_dependencies!]!
+  tags: [entity_tags!]!
+  tags_aggregate: entity_tags_aggregate!
+  artist_overrides: [project_artist_overrides!]!
+  artist_overrides_aggregate: project_artist_overrides_aggregate!
+  artist_profiles: [artists!]
+  oob_tokens: [oob_tokens_metadata!]!
+  oob_tokens_aggregate: oob_tokens_metadata_aggregate!
+  pmp_project_configs: [pmp_project_configs!]!
+  partner_featured_projects: [partner_featured_projects!]!
+  partner_projects: [partner_projects!]!
+  refresh_requests: [refresh_requests!]!
+  features: projects_features
+}
+
+type tokens_metadata {
+  id: String!
+  token_id: String!
+  project_id: String!
+  project: projects_metadata!
+  project_name: String
+  contract_address: String!
+  contract: contracts_metadata!
+  chain_id: Int!
+  chain: chains
+  owner_address: String!
+  owner: users
+  hash: String!
+  invocation: Int!
+  features: jsonb!
+  is_flagged: Boolean!
+  minted_at: timestamptz!
+  last_transferred_at: timestamptz
+  last_refreshed: timestamptz
+  updated_at: timestamp
+  live_view_path: String
+  live_view_url: String
+  media_url: String
+  media_thumb_url: String
+  preview_asset_url: String
+  primary_asset_url: String
+  list_eth_price: float8
+  list_price: float8
+  list_currency_address: String
+  list_currency_symbol: String
+  list_creation_date: timestamptz
+  list_expiration_date: timestamptz
+  list_platform: String
+  list_platform_order_id: String
+  list_url: String
+  list_refreshed_at: timestamptz
+  mint_transaction_hash: String
+  primary_purchase_id: String
+  primary_purchase_details: primary_purchases
+  favorited_by_user: Boolean
+  image: media
+  image_id: Int
+  high_res_image: media
+  high_res_image_id: Int
+  low_res_image: media
+  low_res_image_id: Int
+  gif: media
+  gif_id: Int
+  video: media
+  video_id: Int
+  bids: [bids_metadata!]!
+  bids_aggregate: bids_metadata_aggregate!
+  favorites: [favorites!]!
+  favorites_aggregate: favorites_aggregate!
+  transfers: [transfers_metadata!]!
+  showcase_items: [showcase_items!]!
+  pmps: [pmps_metadata!]!
+  active_pmps: [pmps_metadata!]
+}
+
+type contracts_metadata {
+  address: String!
+  chain_id: Int!
+  chain: chains
+  name: String
+  admin: String
+  contract_type: contract_type_names_enum!
+  core_version: String
+  new_projects_forbidden: Boolean
+  new_projects_forbidden_offchain: Boolean!
+  new_projects_forbidden_onchain: Boolean!
+  auto_approve_artist_split_proposals: Boolean
+  minter_address: String
+  minter_filter_address: String
+  minter_filter: minter_filters_metadata
+  dependency_registry_address: String
+  curation_registry_address: String
+  default_render_provider_secondary_sales_address: String
+  default_render_provider_secondary_sales_bps: Int
+  engine_platform_provider_address: String
+  engine_platform_provider_percentage: Int
+  bucket_name: String
+  preferred_ipfs_gateway: String
+  preferred_arweave_gateway: String
+  on_chain_generator: String
+  latest_dependency_registry_override_allowlisted_on: String
+  partner_id: Int
+  partner: partners
+  default_vertical: project_verticals
+  projects: [projects_metadata!]!
+  allowlisted_users: [contract_allowlistings!]!
+}
+
+type users {
+  public_address: String!
+  display_name: String
+  nonce: String
+  is_curated: Boolean
+  is_curator: Boolean
+  is_delegate: Boolean
+  feature_flags: jsonb
+  tos_accepted_at: timestamptz
+  viewed_warning_banner: Boolean
+  created_at: timestamptz!
+  profile_id: Int
+  profile_by_id: user_profiles
+  favorited_by_user: Boolean
+  projects_created: [projects_metadata!]!
+  projects_created_aggregate: projects_metadata_aggregate!
+  tokens: [tokens_metadata!]!
+  tokens_aggregate: tokens_metadata_aggregate!
+  bids: [bids_metadata!]!
+  bids_aggregate: bids_metadata_aggregate!
+  favorites: [favorites!]!
+  favorites_aggregate: favorites_aggregate!
+  receipts: [receipt_metadata!]!
+  receipts_aggregate: receipt_metadata_aggregate!
+  transfers_from: [transfers_metadata!]!
+  transfers_to: [transfers_metadata!]!
+  allowlisted_on: [contract_allowlistings!]!
+  tags: [entity_tags!]!
+  tags_aggregate: entity_tags_aggregate!
+  webflow_artist_info: webflow_artist_info
+}
+
+type user_profiles {
+  id: Int!
+  username: String
+  name: String
+  bio: String
+  twitter_username: String
+  instagram_username: String
+  discord_username: String
+  external_website: String
+  onboarding_completed: Boolean!
+  profile_picture_id: Int
+  profile_picture: media
+  showcases: [showcases!]!
+  user_achievements: [user_achievements!]!
+  user_achievements_aggregate: user_achievements_aggregate!
+  linked_accounts: [users!]!
+  linked_accounts_aggregate: users_aggregate!
+}
+
+type artists {
+  id: Int!
+  slug: String!
+  display_name: String!
+  bio: String
+  website_url: String
+  twitter: String
+  instagram: String
+  created_at: timestamptz!
+  updated_at: timestamptz!
+  profile_picture_id: Int
+  profile_picture: media
+  header_image_id: Int
+  header_image: media
+  exhibitions: [artist_exhibitions!]!
+  exhibitions_aggregate: artist_exhibitions_aggregate!
+  press: [artist_press!]!
+  press_aggregate: artist_press_aggregate!
+  wallets: [artist_wallets!]!
+  wallets_aggregate: artist_wallets_aggregate!
+  project_overrides: [project_artist_overrides!]!
+  project_overrides_aggregate: project_artist_overrides_aggregate!
+}
+
+type transfers_metadata {
+  id: String!
+  token_id: String!
+  token: tokens_metadata!
+  chain_id: Int!
+  from_address: String!
+  from_wallet: users!
+  to_address: String!
+  to_wallet: users!
+  transaction_hash: String!
+  block_hash: String!
+  block_number: bigint!
+  block_timestamp: bigint!
+}
+
+type minters_metadata {
+  address: String!
+  chain_id: Int!
+  minter_type: minter_type_names_enum!
+  extra_minter_details: jsonb
+  minter_filter_address: String!
+  minter_filter: minter_filters_metadata
+  is_globally_allowlisted_on_minter_filter: Boolean!
+  type: minter_types
+  receipts: [receipt_metadata!]!
+  receipts_aggregate: receipt_metadata_aggregate!
+}
+
+type minter_filters_metadata {
+  address: String!
+  chain_id: Int!
+  type: minter_filter_type_names_enum
+  core_registry_address: String
+  globally_allowed_minters: [minters_metadata!]
+  known_minters: [minters_metadata!]!
+}
+
+type project_minter_configurations {
+  id: String!
+  project_id: String!
+  project: projects_metadata!
+  chain_id: Int!
+  minter_id: String!
+  minter: minters_metadata
+  price_is_configured: Boolean!
+  purchase_to_disabled: Boolean!
+  currency_address: String!
+  currency_symbol: String!
+  base_price: String
+  max_invocations: Int
+  complete: Boolean
+  auction_start_time: timestamptz
+  auction_end_time: timestamptz
+  extra_minter_details: jsonb
+  offchain_extra_minter_details: jsonb
+  properties_updated_at: jsonb!
+}
+
+type bids_metadata {
+  id: String!
+  project_id: String!
+  project: projects_metadata!
+  token_id: String
+  token: tokens_metadata
+  chain_id: Int!
+  core_contract_address: String!
+  core_contract: contracts_metadata!
+  minter_address: String!
+  minter: minters_metadata!
+  bidder_address: String!
+  user: users!
+  bid_type: bid_types_enum!
+  bid_value: String!
+  time_of_bid: timestamptz!
+  log_index: Int!
+  tx_hash: String
+  rank: bigint
+  slot_index: bigint
+  ram_id: Int
+  is_removed: Boolean
+  settled: Boolean
+  winning_bid: Boolean
+}
+
+type receipt_metadata {
+  id: String!
+  project_id: String!
+  project: projects_metadata!
+  chain_id: Int!
+  user_address: String!
+  user: users!
+  minter_id: String!
+  minter: minters_metadata!
+  net_posted: String!
+  num_purchased: String!
+  excess_settlement_funds: String
+  project_minter_configuration: project_minter_configurations
+}
+
+type dependencies_metadata {
+  name_and_version: String!
+  chain_id: Int!
+  dependency_registry_address: String!
+  dependency_registry: dependency_registries!
+  license_type: String!
+  preferred_cdn: String
+  preferred_repository: String
+  website: String
+  script: String
+  updated_at: timestamptz!
+  updated_onchain_at: timestamptz!
+  additional_cdns: [dependency_additional_cdns!]!
+  additional_cdns_aggregate: dependency_additional_cdns_aggregate!
+  additional_repositories: [dependency_additional_repositories!]!
+  additional_repositories_aggregate: dependency_additional_repositories_aggregate!
+  scripts: [dependency_scripts!]!
+  scripts_aggregate: dependency_scripts_aggregate!
+}
+
+type tags {
+  name: String!
+  display_name: String!
+  description: String
+  tagline: String
+  grouping_name: tag_groupings_enum!
+  type: tag_types_enum!
+  status: tag_status_enum!
+  entity_tags: [entity_tags!]!
+  entity_tags_aggregate: entity_tags_aggregate!
+}
+
+type project_verticals {
+  name: verticals_enum!
+  display_name: String!
+  description: String
+  category_name: String!
+  category: project_vertical_categories!
+  active: Boolean!
+  projects: [projects_metadata!]!
+  projects_aggregate: projects_metadata_aggregate!
+}
+
+type partners {
+  id: Int!
+  slug: String!
+  name: String!
+  description: String
+  tagline: String
+  type: partner_types_enum!
+  website: String
+  twitter_handle: String
+  instagram_handle: String
+  discord: String
+  profile_picture_id: Int
+  profile_picture: media
+  properties_updated_at: jsonb!
+  contracts: [contracts_metadata!]!
+  contracts_aggregate: contracts_metadata_aggregate!
+  projects: [projects_metadata!]!
+  featured_projects: [partner_featured_projects!]!
+  tags: [partners_tags!]!
+}
+
+type favorites {
+  id: Int!
+  user_public_address: String!
+  user: users!
+  chain_id: Int!
+  favorited_project_id: String
+  project_metadata: projects_metadata
+  favorited_token_id: String
+  token_metadata: tokens_metadata
+  favorited_user_address: String
+  favorited_user: users
+}
+
+type showcases {
+  id: uuid!
+  user_profile_id: Int!
+  user_profile: user_profiles!
+  created_at: timestamptz!
+  updated_at: timestamptz!
+  showcase_items: [showcase_items!]!
+}
+
+type achievements {
+  id: Int!
+  slug: String!
+  name: String!
+  description: String
+  type: achievement_types_enum
+  is_public: Boolean!
+  image_id: Int
+  image: media
+  set_id: Int
+  set: sets
+  achievement_type: achievement_types
+  user_achievements: [user_achievements!]!
+  user_achievements_aggregate: user_achievements_aggregate!
+}
+
+type sets {
+  id: Int!
+  slug: String!
+  name: String!
+  description: String
+  is_public: Boolean!
+  achievements: [achievements!]!
+  set_buckets: [set_buckets!]!
+}
+
+type media {
+  id: Int!
+  url: String!
+  width: Int
+  height: Int
+  size: Int
+  mime_type: String
+  bucket_name: String
+}
+
+# ─────────────────────────────────────────────
+# Supporting / join types
+# ─────────────────────────────────────────────
+
+type chains {
+  id: Int!
+  name: String
+  network_id: Int
+}
+
+type entity_tags {
+  id: Int!
+  name: String!
+  tag: tags!
+  project_id: String
+  project: projects_metadata
+  user_address: String
+  user: users
+  contract_address: String
+}
+
+type project_scripts {
+  project_id: String!
+  index: Int!
+  script: String!
+}
+
+type project_external_asset_dependencies {
+  project_id: String!
+  index: Int!
+  cid: String!
+  dependency_type: project_external_asset_dependency_types_enum!
+  data: String
+}
+
+type project_artist_overrides {
+  project_id: String!
+  artist_id: Int!
+  project: projects_metadata!
+  artist: artists!
+}
+
+type artist_exhibitions {
+  id: Int!
+  artist_id: Int!
+  artist: artists!
+  exhibition_name: String
+  venue: String
+  year: Int
+}
+
+type artist_press {
+  id: Int!
+  artist_id: Int!
+  artist: artists!
+  publication: String
+  article_title: String
+  article_url: String
+  year: Int
+}
+
+type artist_wallets {
+  wallet_address: String!
+  artist_id: Int!
+  artist: artists!
+}
+
+type dependency_registries {
+  address: String!
+  chain_id: Int!
+  owner: String
+  updated_at: timestamptz!
+  updated_onchain_at: timestamptz!
+  dependencies: [dependencies_metadata!]!
+}
+
+type dependency_additional_cdns {
+  dependency_name_and_version: String!
+  index: Int!
+  cdn: String!
+}
+
+type dependency_additional_repositories {
+  dependency_name_and_version: String!
+  index: Int!
+  repository: String!
+}
+
+type dependency_scripts {
+  dependency_name_and_version: String!
+  index: Int!
+  script: String!
+}
+
+type primary_purchases {
+  id: String!
+  token_id: String!
+  token: tokens_metadata!
+  purchase_transaction_hash: String
+  currency_address: String
+  currency_symbol: String
+  price: String
+}
+
+type pmps_metadata {
+  id: String!
+  token_id: String!
+  token: tokens_metadata!
+}
+
+type oob_tokens_metadata {
+  id: String!
+  project_id: String!
+  project: projects_metadata!
+  token_id: Int!
+}
+
+type projects_features {
+  project_id: String!
+  feature_fields: jsonb
+}
+
+type showcase_items {
+  id: Int!
+  token_id: String
+  token: tokens_metadata
+  showcase_id: uuid!
+  showcase: showcases!
+  position: Int
+}
+
+type user_achievements {
+  id: Int!
+  user_address: String!
+  achievement_id: Int!
+  achievement: achievements!
+  awarded_at: timestamptz
+}
+
+type set_buckets {
+  id: Int!
+  set_id: Int!
+  set: sets!
+  type: set_bucket_types_enum!
+}
+
+type partner_featured_projects {
+  partner_id: Int!
+  partner: partners!
+  project_id: String!
+  project: projects_metadata!
+  position: Int!
+}
+
+type partner_projects {
+  partner_id: Int!
+  project_id: String!
+  project: projects_metadata!
+}
+
+type partners_tags {
+  partner_id: Int!
+  partner: partners!
+  tag_name: partner_tags_enum!
+}
+
+type contract_allowlistings {
+  contract_address: String!
+  user_address: String!
+  contract: contracts_metadata!
+  user: users!
+}
+
+type proposed_artist_addresses_and_splits {
+  id: String!
+  project_id: String!
+  artist_address: String!
+  additional_payee_primary_sales_address: String
+  additional_payee_primary_sales_percentage: Int
+  additional_payee_secondary_sales_address: String
+  additional_payee_secondary_sales_percentage: Int
+}
+
+type project_series {
+  id: Int!
+  name: String!
+  projects: [projects_metadata!]!
+}
+
+type project_vertical_categories {
+  name: String!
+  display_name: String!
+  verticals: [project_verticals!]!
+}
+
+type royalty_splitter_contracts {
+  address: String!
+  chain_id: Int!
+}
+
+type split_atomic_contracts {
+  address: String!
+  chain_id: Int!
+}
+
+type minter_types {
+  name: minter_type_names_enum!
+  label: String!
+}
+
+type achievement_types {
+  type: String!
+}
+
+type pmp_project_configs {
+  id: String!
+  project_id: String!
+  project: projects_metadata!
+}
+
+type webflow_artist_info {
+  user_address: String!
+  created_at: timestamptz
+  updated_at: timestamptz
+}
+
+type refresh_requests {
+  id: String!
+  project_id: String!
+  type: refresh_request_types_enum!
+  submitted_at: timestamptz!
+  completed_at: timestamptz
+}
+
+enum set_bucket_types_enum {
+  ordered
+  unordered
+}
+
+enum refresh_request_types_enum {
+  project
+  token
+}
+
+enum project_external_asset_dependency_types_enum {
+  IPFS
+  ARWEAVE
+  ONCHAIN
+  ART_BLOCKS_DEPENDENCY_REGISTRY
+}
+
+# ─────────────────────────────────────────────
+# Aggregate / connection types (representative)
+# ─────────────────────────────────────────────
+
+type projects_metadata_aggregate {
+  aggregate: projects_metadata_aggregate_fields
+  nodes: [projects_metadata!]!
+}
+
+type projects_metadata_aggregate_fields {
+  count: Int!
+  min: projects_metadata_min_fields
+  max: projects_metadata_max_fields
+}
+
+type projects_metadata_min_fields {
+  id: String
+  name: String
+  artist_address: String
+  chain_id: Int
+  activated_at: timestamptz
+  updated_at: timestamp
+}
+
+type projects_metadata_max_fields {
+  id: String
+  name: String
+  artist_address: String
+  chain_id: Int
+  activated_at: timestamptz
+  updated_at: timestamp
+}
+
+type tokens_metadata_aggregate {
+  aggregate: tokens_metadata_aggregate_fields
+  nodes: [tokens_metadata!]!
+}
+
+type tokens_metadata_aggregate_fields {
+  count: Int!
+  avg: tokens_metadata_avg_fields
+  min: tokens_metadata_min_fields
+  max: tokens_metadata_max_fields
+}
+
+type tokens_metadata_avg_fields {
+  invocation: Float
+  list_eth_price: Float
+  list_price: Float
+}
+
+type tokens_metadata_min_fields {
+  id: String
+  owner_address: String
+  minted_at: timestamptz
+}
+
+type tokens_metadata_max_fields {
+  id: String
+  owner_address: String
+  minted_at: timestamptz
+}
+
+type users_aggregate {
+  aggregate: users_aggregate_fields
+  nodes: [users!]!
+}
+
+type users_aggregate_fields {
+  count: Int!
+}
+
+type bids_metadata_aggregate {
+  aggregate: bids_metadata_aggregate_fields
+  nodes: [bids_metadata!]!
+}
+
+type bids_metadata_aggregate_fields {
+  count: Int!
+}
+
+type favorites_aggregate {
+  aggregate: favorites_aggregate_fields
+  nodes: [favorites!]!
+}
+
+type favorites_aggregate_fields {
+  count: Int!
+}
+
+type receipt_metadata_aggregate {
+  aggregate: receipt_metadata_aggregate_fields
+  nodes: [receipt_metadata!]!
+}
+
+type receipt_metadata_aggregate_fields {
+  count: Int!
+}
+
+type entity_tags_aggregate {
+  aggregate: entity_tags_aggregate_fields
+  nodes: [entity_tags!]!
+}
+
+type entity_tags_aggregate_fields {
+  count: Int!
+}
+
+type user_achievements_aggregate {
+  aggregate: user_achievements_aggregate_fields
+  nodes: [user_achievements!]!
+}
+
+type user_achievements_aggregate_fields {
+  count: Int!
+}
+
+type artist_exhibitions_aggregate {
+  aggregate: artist_exhibitions_aggregate_fields
+  nodes: [artist_exhibitions!]!
+}
+
+type artist_exhibitions_aggregate_fields {
+  count: Int!
+}
+
+type artist_press_aggregate {
+  aggregate: artist_press_aggregate_fields
+  nodes: [artist_press!]!
+}
+
+type artist_press_aggregate_fields {
+  count: Int!
+}
+
+type artist_wallets_aggregate {
+  aggregate: artist_wallets_aggregate_fields
+  nodes: [artist_wallets!]!
+}
+
+type artist_wallets_aggregate_fields {
+  count: Int!
+}
+
+type project_artist_overrides_aggregate {
+  aggregate: project_artist_overrides_aggregate_fields
+  nodes: [project_artist_overrides!]!
+}
+
+type project_artist_overrides_aggregate_fields {
+  count: Int!
+}
+
+type oob_tokens_metadata_aggregate {
+  aggregate: oob_tokens_metadata_aggregate_fields
+  nodes: [oob_tokens_metadata!]!
+}
+
+type oob_tokens_metadata_aggregate_fields {
+  count: Int!
+}
+
+type contracts_metadata_aggregate {
+  aggregate: contracts_metadata_aggregate_fields
+  nodes: [contracts_metadata!]!
+}
+
+type contracts_metadata_aggregate_fields {
+  count: Int!
+}
+
+type dependency_additional_cdns_aggregate {
+  aggregate: dependency_additional_cdns_aggregate_fields
+  nodes: [dependency_additional_cdns!]!
+}
+
+type dependency_additional_cdns_aggregate_fields {
+  count: Int!
+}
+
+type dependency_additional_repositories_aggregate {
+  aggregate: dependency_additional_repositories_aggregate_fields
+  nodes: [dependency_additional_repositories!]!
+}
+
+type dependency_additional_repositories_aggregate_fields {
+  count: Int!
+}
+
+type dependency_scripts_aggregate {
+  aggregate: dependency_scripts_aggregate_fields
+  nodes: [dependency_scripts!]!
+}
+
+type dependency_scripts_aggregate_fields {
+  count: Int!
+}
+
+# ─────────────────────────────────────────────
+# Root types
+# ─────────────────────────────────────────────
+
+type query_root {
+  # Projects
+  projects_metadata(where: projects_metadata_bool_exp, order_by: [projects_metadata_order_by!], limit: Int, offset: Int): [projects_metadata!]!
+  projects_metadata_by_pk(id: String!): projects_metadata
+
+  # Tokens
+  tokens_metadata(where: tokens_metadata_bool_exp, order_by: [tokens_metadata_order_by!], limit: Int, offset: Int): [tokens_metadata!]!
+  tokens_metadata_by_pk(id: String!): tokens_metadata
+
+  # Contracts
+  contracts_metadata(where: contracts_metadata_bool_exp, order_by: [contracts_metadata_order_by!], limit: Int, offset: Int): [contracts_metadata!]!
+  contracts_metadata_by_pk(address: String!, chain_id: Int!): contracts_metadata
+
+  # Users
+  users(where: users_bool_exp, order_by: [users_order_by!], limit: Int, offset: Int): [users!]!
+  users_by_pk(public_address: String!): users
+
+  # Artists
+  artists(where: artists_bool_exp, order_by: [artists_order_by!], limit: Int, offset: Int): [artists!]!
+  artists_by_pk(id: Int!): artists
+
+  # Transfers
+  transfers_metadata(where: transfers_metadata_bool_exp, order_by: [transfers_metadata_order_by!], limit: Int, offset: Int): [transfers_metadata!]!
+  transfers_metadata_by_pk(id: String!): transfers_metadata
+
+  # Minters
+  minters_metadata(where: minters_metadata_bool_exp, limit: Int, offset: Int): [minters_metadata!]!
+  minters_metadata_by_pk(address: String!, chain_id: Int!): minters_metadata
+
+  # Minter filters
+  minter_filters_metadata(limit: Int, offset: Int): [minter_filters_metadata!]!
+  minter_filters_metadata_by_pk(address: String!, chain_id: Int!): minter_filters_metadata
+
+  # Project minter configs
+  project_minter_configurations(where: project_minter_configurations_bool_exp, limit: Int, offset: Int): [project_minter_configurations!]!
+  project_minter_configurations_by_pk(id: String!): project_minter_configurations
+
+  # Bids
+  bids_metadata(where: bids_metadata_bool_exp, order_by: [bids_metadata_order_by!], limit: Int, offset: Int): [bids_metadata!]!
+  bids_metadata_by_pk(id: String!): bids_metadata
+  bids_metadata_aggregate(where: bids_metadata_bool_exp): bids_metadata_aggregate!
+
+  # Receipts
+  receipt_metadata(where: receipt_metadata_bool_exp, limit: Int, offset: Int): [receipt_metadata!]!
+  receipt_metadata_by_pk(id: String!): receipt_metadata
+
+  # Favorites
+  favorites(where: favorites_bool_exp, order_by: [favorites_order_by!], limit: Int, offset: Int): [favorites!]!
+  favorites_by_pk(id: Int!): favorites
+
+  # Tags
+  tags(where: tags_bool_exp, order_by: [tags_order_by!], limit: Int, offset: Int): [tags!]!
+  tags_by_pk(name: String!): tags
+
+  # Dependencies
+  dependencies_metadata(where: dependencies_metadata_bool_exp, limit: Int, offset: Int): [dependencies_metadata!]!
+  dependencies_metadata_by_pk(name_and_version: String!, chain_id: Int!): dependencies_metadata
+
+  # Dependency registries
+  dependency_registries(limit: Int, offset: Int): [dependency_registries!]!
+  dependency_registries_by_pk(address: String!, chain_id: Int!): dependency_registries
+
+  # Partners
+  partners(where: partners_bool_exp, order_by: [partners_order_by!], limit: Int, offset: Int): [partners!]!
+  partners_by_pk(id: Int!): partners
+
+  # Project verticals
+  project_verticals(limit: Int, offset: Int): [project_verticals!]!
+  project_verticals_by_pk(name: verticals_enum!): project_verticals
+
+  # User profiles
+  user_profiles(where: user_profiles_bool_exp, limit: Int, offset: Int): [user_profiles!]!
+  user_profiles_by_pk(id: Int!): user_profiles
+
+  # Showcases
+  showcases(where: showcases_bool_exp, limit: Int, offset: Int): [showcases!]!
+  showcases_by_pk(id: uuid!): showcases
+
+  # Achievements
+  achievements(limit: Int, offset: Int): [achievements!]!
+  achievements_by_pk(id: Int!): achievements
+
+  # Sets
+  sets(limit: Int, offset: Int): [sets!]!
+  sets_by_pk(id: Int!): sets
+
+  # Aggregates
+  projects_metadata_aggregate(where: projects_metadata_bool_exp): projects_metadata_aggregate!
+  tokens_metadata_aggregate(where: tokens_metadata_bool_exp): tokens_metadata_aggregate!
+}
+
+type subscription_root {
+  projects_metadata(where: projects_metadata_bool_exp, order_by: [projects_metadata_order_by!], limit: Int, offset: Int): [projects_metadata!]!
+  projects_metadata_by_pk(id: String!): projects_metadata
+  projects_metadata_stream(batch_size: Int!, cursor: [projects_metadata_stream_cursor_input!]!, where: projects_metadata_bool_exp): [projects_metadata!]!
+
+  tokens_metadata(where: tokens_metadata_bool_exp, order_by: [tokens_metadata_order_by!], limit: Int, offset: Int): [tokens_metadata!]!
+  tokens_metadata_by_pk(id: String!): tokens_metadata
+  tokens_metadata_stream(batch_size: Int!, cursor: [tokens_metadata_stream_cursor_input!]!, where: tokens_metadata_bool_exp): [tokens_metadata!]!
+
+  transfers_metadata(where: transfers_metadata_bool_exp, order_by: [transfers_metadata_order_by!], limit: Int, offset: Int): [transfers_metadata!]!
+  transfers_metadata_stream(batch_size: Int!, cursor: [transfers_metadata_stream_cursor_input!]!, where: transfers_metadata_bool_exp): [transfers_metadata!]!
+
+  bids_metadata(where: bids_metadata_bool_exp, order_by: [bids_metadata_order_by!], limit: Int, offset: Int): [bids_metadata!]!
+  bids_metadata_stream(batch_size: Int!, cursor: [bids_metadata_stream_cursor_input!]!, where: bids_metadata_bool_exp): [bids_metadata!]!
+}
+
+schema {
+  query: query_root
+  subscription: subscription_root
+}
+
+# ─────────────────────────────────────────────
+# Stub input types (Hasura filter / order_by)
+# Included for completeness; full filter fields
+# mirror the scalar fields on each object type.
+# ─────────────────────────────────────────────
+
+input projects_metadata_bool_exp {
+  _and: [projects_metadata_bool_exp!]
+  _or: [projects_metadata_bool_exp!]
+  _not: projects_metadata_bool_exp
+  id: String_comparison_exp
+  project_id: String_comparison_exp
+  name: String_comparison_exp
+  artist_address: String_comparison_exp
+  artist_name: String_comparison_exp
+  contract_address: String_comparison_exp
+  chain_id: Int_comparison_exp
+  curation_status: curation_statuses_enum_comparison_exp
+  active: Boolean_comparison_exp
+  paused: Boolean_comparison_exp
+  complete: Boolean_comparison_exp
+  invocations: bigint_comparison_exp
+  max_invocations: Int_comparison_exp
+}
+
+input tokens_metadata_bool_exp {
+  _and: [tokens_metadata_bool_exp!]
+  _or: [tokens_metadata_bool_exp!]
+  _not: tokens_metadata_bool_exp
+  id: String_comparison_exp
+  token_id: String_comparison_exp
+  project_id: String_comparison_exp
+  contract_address: String_comparison_exp
+  chain_id: Int_comparison_exp
+  owner_address: String_comparison_exp
+  is_flagged: Boolean_comparison_exp
+  minted_at: timestamptz_comparison_exp
+}
+
+input contracts_metadata_bool_exp {
+  _and: [contracts_metadata_bool_exp!]
+  _or: [contracts_metadata_bool_exp!]
+  _not: contracts_metadata_bool_exp
+  address: String_comparison_exp
+  chain_id: Int_comparison_exp
+  contract_type: contract_type_names_enum_comparison_exp
+  name: String_comparison_exp
+}
+
+input users_bool_exp {
+  _and: [users_bool_exp!]
+  _or: [users_bool_exp!]
+  _not: users_bool_exp
+  public_address: String_comparison_exp
+  is_curated: Boolean_comparison_exp
+  is_curator: Boolean_comparison_exp
+}
+
+input artists_bool_exp {
+  _and: [artists_bool_exp!]
+  _or: [artists_bool_exp!]
+  _not: artists_bool_exp
+  id: Int_comparison_exp
+  slug: String_comparison_exp
+  display_name: String_comparison_exp
+}
+
+input transfers_metadata_bool_exp {
+  _and: [transfers_metadata_bool_exp!]
+  _or: [transfers_metadata_bool_exp!]
+  _not: transfers_metadata_bool_exp
+  id: String_comparison_exp
+  token_id: String_comparison_exp
+  chain_id: Int_comparison_exp
+  from_address: String_comparison_exp
+  to_address: String_comparison_exp
+}
+
+input minters_metadata_bool_exp {
+  _and: [minters_metadata_bool_exp!]
+  _or: [minters_metadata_bool_exp!]
+  _not: minters_metadata_bool_exp
+  address: String_comparison_exp
+  chain_id: Int_comparison_exp
+  minter_type: minter_type_names_enum_comparison_exp
+}
+
+input project_minter_configurations_bool_exp {
+  _and: [project_minter_configurations_bool_exp!]
+  _or: [project_minter_configurations_bool_exp!]
+  _not: project_minter_configurations_bool_exp
+  id: String_comparison_exp
+  project_id: String_comparison_exp
+  chain_id: Int_comparison_exp
+  price_is_configured: Boolean_comparison_exp
+}
+
+input bids_metadata_bool_exp {
+  _and: [bids_metadata_bool_exp!]
+  _or: [bids_metadata_bool_exp!]
+  _not: bids_metadata_bool_exp
+  id: String_comparison_exp
+  project_id: String_comparison_exp
+  chain_id: Int_comparison_exp
+  bidder_address: String_comparison_exp
+  bid_type: bid_types_enum_comparison_exp
+}
+
+input receipt_metadata_bool_exp {
+  _and: [receipt_metadata_bool_exp!]
+  _or: [receipt_metadata_bool_exp!]
+  _not: receipt_metadata_bool_exp
+  id: String_comparison_exp
+  project_id: String_comparison_exp
+  user_address: String_comparison_exp
+}
+
+input favorites_bool_exp {
+  _and: [favorites_bool_exp!]
+  _or: [favorites_bool_exp!]
+  _not: favorites_bool_exp
+  id: Int_comparison_exp
+  user_public_address: String_comparison_exp
+  favorited_project_id: String_comparison_exp
+  favorited_token_id: String_comparison_exp
+}
+
+input tags_bool_exp {
+  _and: [tags_bool_exp!]
+  _or: [tags_bool_exp!]
+  _not: tags_bool_exp
+  name: String_comparison_exp
+  type: tag_types_enum_comparison_exp
+  status: tag_status_enum_comparison_exp
+}
+
+input dependencies_metadata_bool_exp {
+  _and: [dependencies_metadata_bool_exp!]
+  _or: [dependencies_metadata_bool_exp!]
+  _not: dependencies_metadata_bool_exp
+  name_and_version: String_comparison_exp
+  chain_id: Int_comparison_exp
+}
+
+input partners_bool_exp {
+  _and: [partners_bool_exp!]
+  _or: [partners_bool_exp!]
+  _not: partners_bool_exp
+  id: Int_comparison_exp
+  slug: String_comparison_exp
+  type: partner_types_enum_comparison_exp
+}
+
+input user_profiles_bool_exp {
+  _and: [user_profiles_bool_exp!]
+  _or: [user_profiles_bool_exp!]
+  _not: user_profiles_bool_exp
+  id: Int_comparison_exp
+  username: String_comparison_exp
+}
+
+input showcases_bool_exp {
+  _and: [showcases_bool_exp!]
+  _or: [showcases_bool_exp!]
+  _not: showcases_bool_exp
+  id: uuid_comparison_exp
+  user_profile_id: Int_comparison_exp
+}
+
+# Comparison expression scalars
+input String_comparison_exp {
+  _eq: String
+  _neq: String
+  _in: [String!]
+  _nin: [String!]
+  _is_null: Boolean
+  _like: String
+  _ilike: String
+  _nlike: String
+  _nilike: String
+  _gt: String
+  _gte: String
+  _lt: String
+  _lte: String
+}
+
+input Int_comparison_exp {
+  _eq: Int
+  _neq: Int
+  _in: [Int!]
+  _nin: [Int!]
+  _is_null: Boolean
+  _gt: Int
+  _gte: Int
+  _lt: Int
+  _lte: Int
+}
+
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _neq: Boolean
+  _is_null: Boolean
+}
+
+input bigint_comparison_exp {
+  _eq: bigint
+  _neq: bigint
+  _gt: bigint
+  _gte: bigint
+  _lt: bigint
+  _lte: bigint
+  _is_null: Boolean
+}
+
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _neq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _lt: timestamptz
+  _lte: timestamptz
+  _is_null: Boolean
+}
+
+input uuid_comparison_exp {
+  _eq: uuid
+  _neq: uuid
+  _is_null: Boolean
+}
+
+input curation_statuses_enum_comparison_exp {
+  _eq: curation_statuses_enum
+  _neq: curation_statuses_enum
+  _in: [curation_statuses_enum!]
+  _nin: [curation_statuses_enum!]
+}
+
+input contract_type_names_enum_comparison_exp {
+  _eq: contract_type_names_enum
+  _neq: contract_type_names_enum
+  _in: [contract_type_names_enum!]
+}
+
+input minter_type_names_enum_comparison_exp {
+  _eq: minter_type_names_enum
+  _neq: minter_type_names_enum
+  _in: [minter_type_names_enum!]
+}
+
+input bid_types_enum_comparison_exp {
+  _eq: bid_types_enum
+  _neq: bid_types_enum
+  _in: [bid_types_enum!]
+}
+
+input partner_types_enum_comparison_exp {
+  _eq: partner_types_enum
+  _neq: partner_types_enum
+  _in: [partner_types_enum!]
+}
+
+input tag_types_enum_comparison_exp {
+  _eq: tag_types_enum
+  _neq: tag_types_enum
+  _in: [tag_types_enum!]
+}
+
+input tag_status_enum_comparison_exp {
+  _eq: tag_status_enum
+  _neq: tag_status_enum
+}
+
+# Order by input stubs
+input projects_metadata_order_by {
+  id: order_by
+  name: order_by
+  artist_address: order_by
+  chain_id: order_by
+  curation_status: order_by
+  invocations: order_by
+  activated_at: order_by
+  updated_at: order_by
+  lowest_listing: order_by
+}
+
+input tokens_metadata_order_by {
+  id: order_by
+  token_id: order_by
+  project_id: order_by
+  owner_address: order_by
+  minted_at: order_by
+  last_transferred_at: order_by
+  list_eth_price: order_by
+  invocation: order_by
+}
+
+input users_order_by {
+  public_address: order_by
+  display_name: order_by
+  created_at: order_by
+}
+
+input artists_order_by {
+  id: order_by
+  slug: order_by
+  display_name: order_by
+  created_at: order_by
+}
+
+input transfers_metadata_order_by {
+  id: order_by
+  token_id: order_by
+  chain_id: order_by
+  block_timestamp: order_by
+  block_number: order_by
+}
+
+input bids_metadata_order_by {
+  id: order_by
+  project_id: order_by
+  bidder_address: order_by
+  bid_value: order_by
+  time_of_bid: order_by
+  rank: order_by
+}
+
+input favorites_order_by {
+  id: order_by
+  user_public_address: order_by
+}
+
+input tags_order_by {
+  name: order_by
+  display_name: order_by
+  grouping_name: order_by
+}
+
+input partners_order_by {
+  id: order_by
+  name: order_by
+  slug: order_by
+}
+
+input contracts_metadata_order_by {
+  address: order_by
+  chain_id: order_by
+  name: order_by
+}
+
+# Stream cursor inputs
+input projects_metadata_stream_cursor_input {
+  initial_value: projects_metadata_stream_cursor_value_input!
+  ordering: cursor_ordering
+}
+
+input projects_metadata_stream_cursor_value_input {
+  id: String
+  updated_at: timestamp
+}
+
+input tokens_metadata_stream_cursor_input {
+  initial_value: tokens_metadata_stream_cursor_value_input!
+  ordering: cursor_ordering
+}
+
+input tokens_metadata_stream_cursor_value_input {
+  id: String
+  minted_at: timestamptz
+}
+
+input transfers_metadata_stream_cursor_input {
+  initial_value: transfers_metadata_stream_cursor_value_input!
+  ordering: cursor_ordering
+}
+
+input transfers_metadata_stream_cursor_value_input {
+  id: String
+  block_timestamp: bigint
+}
+
+input bids_metadata_stream_cursor_input {
+  initial_value: bids_metadata_stream_cursor_value_input!
+  ordering: cursor_ordering
+}
+
+input bids_metadata_stream_cursor_value_input {
+  id: String
+  time_of_bid: timestamptz
+}
+
+enum cursor_ordering {
+  ASC
+  DESC
+}
