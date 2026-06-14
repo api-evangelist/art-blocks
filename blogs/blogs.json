@@ -1,0 +1,27 @@
+{
+  "name": "Art Blocks Blogs",
+  "description": "Blog and developer content feeds for Art Blocks.",
+  "url": "https://www.artblocks.io",
+  "created": "2026-06-13",
+  "modified": "2026-06-13",
+  "feeds": [
+    {
+      "name": "Art Blocks Blog",
+      "url": "https://www.artblocks.io/blog",
+      "type": "blog",
+      "format": "html",
+      "last_fetched": null,
+      "post_count": 0,
+      "posts": []
+    },
+    {
+      "name": "Art Blocks Developer Documentation",
+      "url": "https://docs.artblocks.io",
+      "type": "docs",
+      "format": "html",
+      "last_fetched": null,
+      "post_count": 0,
+      "posts": []
+    }
+  ]
+}

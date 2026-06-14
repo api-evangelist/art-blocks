@@ -59,6 +59,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.artblocks.io/developer/token-and-generator-apis/
+      - type: OpenAPI
+        url: openapi/art-blocks-token-api.json
   - aid: art-blocks:generator-api
     name: Art Blocks Generator API
     description: >-
@@ -80,6 +82,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.artblocks.io/developer/token-and-generator-apis/
+      - type: OpenAPI
+        url: openapi/art-blocks-generator-api.json
   - aid: art-blocks:media-proxy-api
     name: Art Blocks Media Proxy API
     description: >-
@@ -100,6 +104,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.artblocks.io/developer/token-and-generator-apis/
+      - type: OpenAPI
+        url: openapi/art-blocks-media-proxy-api.json
   - aid: art-blocks:graphql-api
     name: Art Blocks GraphQL API (Hasura)
     description: >-
@@ -244,6 +250,10 @@ common:
     url: rate-limits/art-blocks-rate-limits.yml
   - type: FinOps
     url: finops/art-blocks-finops.yml
+  - type: JSONLd
+    url: json-ld/art-blocks.json
+  - type: Blogs
+    url: blogs/blogs.json
 integrations:
   - name: Ethereum
   - name: Arbitrum One
