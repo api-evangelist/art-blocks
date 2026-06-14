@@ -1,0 +1,58 @@
+name: Art Blocks API FinOps
+description: >-
+  Art Blocks hosted APIs (Token, Generator, Media Proxy, Hasura GraphQL, and
+  MCP Server) are provided free of charge with no published cost model or usage
+  billing. The only cost-bearing access path is The Graph Network subgraph,
+  where query costs are metered in GRT (Graph tokens) and depend on query
+  complexity and indexer fees set on the decentralised network. Developers
+  should budget for GRT allocation when using The Graph endpoints at scale.
+costModel: mixed
+components:
+  - name: Token API
+    costType: free
+    billing: none
+    notes: No cost. Operated by Art Blocks as a public good.
+  - name: Generator API
+    costType: free
+    billing: none
+    notes: No cost. Operated by Art Blocks as a public good.
+  - name: Media Proxy API
+    costType: free
+    billing: none
+    notes: No cost. Operated by Art Blocks as a public good.
+  - name: Hasura GraphQL API
+    costType: free
+    billing: none
+    notes: >-
+      No cost. JWT authentication required but no usage fees.
+      Operated by Art Blocks on Hasura Cloud.
+  - name: The Graph Subgraph
+    costType: usage-based
+    billing: GRT tokens
+    notes: >-
+      Costs denominated in GRT on The Graph Network. Developers must fund an
+      API key in The Graph Studio; query fees are metered per query by
+      participating indexers. Pricing varies with network conditions.
+    links:
+      - title: The Graph Studio — Manage API Keys
+        url: https://thegraph.com/docs/en/studio/managing-api-keys/
+      - title: The Graph — Querying from Your App
+        url: https://thegraph.com/docs/en/developer/querying-from-your-app/
+  - name: MCP Server
+    costType: free
+    billing: none
+    notes: >-
+      No cost. OAuth 2.1 authentication required. 21 tools available;
+      per-user rate limits may apply at high volumes.
+recommendations:
+  - >-
+    For most read-only integrations, use the Hasura GraphQL API
+    (data.artblocks.io) — it is free, stable, and covers both on-chain and
+    off-chain data.
+  - >-
+    Use The Graph subgraph only when decentralised infrastructure is a
+    requirement or when on-chain-only data is sufficient; factor in GRT
+    allocation costs.
+  - >-
+    For AI agent workflows, the MCP Server at mcp.artblocks.io provides 21
+    specialised tools with no usage cost.

@@ -1,0 +1,45 @@
+name: Art Blocks API Rate Limits
+description: >-
+  Art Blocks does not publish explicit numeric rate limits for its hosted APIs.
+  The Token API, Generator API, and Media Proxy API are open and undocumented
+  for rate limiting purposes. The Hasura GraphQL API applies per-user limits
+  enforced by Hasura Cloud but figures are not publicly disclosed. The Graph
+  subgraph enforces query-level pagination caps. The MCP Server applies
+  per-user rate limits that trigger HTTP 429 responses.
+rateLimits:
+  - api: Token API
+    endpoint: https://token.artblocks.io
+    limitType: unknown
+    notes: No published rate limit; open access without authentication.
+  - api: Generator API
+    endpoint: https://generator.artblocks.io
+    limitType: unknown
+    notes: No published rate limit; open access without authentication.
+  - api: Media Proxy API
+    endpoint: https://media-proxy.artblocks.io
+    limitType: unknown
+    notes: No published rate limit; open access without authentication.
+  - api: Hasura GraphQL API
+    endpoint: https://data.artblocks.io/v1/graphql
+    limitType: per-user
+    notes: >-
+      Rate limits enforced by Hasura Cloud; specific thresholds are not
+      publicly documented. JWT authentication required.
+  - api: The Graph Subgraph (all chains)
+    endpoint: https://gateway-arbitrum.network.thegraph.com
+    limitType: query-parameter
+    limits:
+      - parameter: first
+        maximum: 1000
+      - parameter: skip
+        maximum: 5000
+    notes: >-
+      Pagination caps enforced by The Graph protocol. For large result sets
+      cursor-style pagination using token ID or block number is recommended.
+  - api: MCP Server
+    endpoint: https://mcp.artblocks.io/mcp
+    limitType: per-user
+    notes: >-
+      Per-user rate limits enforced; HTTP 429 returned when exceeded.
+      Specific thresholds are not publicly documented. Retry with backoff
+      is recommended.

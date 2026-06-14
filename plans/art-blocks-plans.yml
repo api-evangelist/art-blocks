@@ -1,0 +1,62 @@
+name: Art Blocks API Plans
+description: >-
+  Art Blocks does not publish tiered commercial pricing plans for its public
+  APIs. The Token API, Generator API, and Media Proxy API are freely accessible
+  without authentication or API keys. The Hasura GraphQL API
+  (data.artblocks.io) is publicly accessible but requires JWT authentication
+  for queries that request off-chain data or write operations; tokens are
+  obtained via the Art Blocks authentication endpoint. The Graph subgraph
+  endpoints require a developer API key from The Graph Network studio. The MCP
+  Server (mcp.artblocks.io) uses OAuth 2.1 and is available to any developer
+  after a one-time sign-in.
+plans:
+  - name: Free — Token, Generator, and Media Proxy APIs
+    description: >-
+      No authentication required. Open access to the Token API for ERC-721
+      metadata, the Generator API for live iframe artwork views, and the Media
+      Proxy API for static PNG renders. Available across Ethereum, Arbitrum One,
+      and Base mainnet as well as Sepolia testnet.
+    authentication: none
+    rateLimit: unspecified
+    cost: free
+    endpoints:
+      - https://token.artblocks.io/{chainID}/{contractAddress}/{tokenID}
+      - https://generator.artblocks.io/{chainID}/{contractAddress}/{tokenID}
+      - https://media-proxy.artblocks.io/{chainID}/{contractAddress}/{tokenID}.png
+  - name: Free — Hasura GraphQL API
+    description: >-
+      JWT-authenticated GraphQL API providing on-chain and off-chain data for
+      Art Blocks projects and tokens. Authentication is performed by signing a
+      message with an Ethereum wallet; the resulting JWT is passed as a bearer
+      token. The playground at Hasura Cloud is publicly accessible for ad-hoc
+      queries.
+    authentication: jwt-bearer
+    rateLimit: unspecified
+    cost: free
+    endpoints:
+      - https://data.artblocks.io/v1/graphql
+  - name: Free — The Graph Subgraph
+    description: >-
+      Decentralised subgraph endpoints via The Graph Network for on-chain data
+      across Ethereum, Arbitrum One, and Base. Requires a developer API key
+      from The Graph Studio; query costs are metered in GRT on The Graph
+      Network.
+    authentication: api-key
+    rateLimit: first<=1000, skip<=5000 per query
+    cost: usage-based-GRT
+    endpoints:
+      - https://gateway-arbitrum.network.thegraph.com/api/{api-key}/subgraphs/id/6bR1oVsRUUs6czNiB6W7NNenTXtVfNd5iSiwvS4QbRPB
+      - https://gateway-arbitrum.network.thegraph.com/api/{api-key}/subgraphs/id/5WwGsBwJ2hVBpc3DphX4VHVMsoPnRkVkuZF4HTArZjCm
+      - https://gateway-arbitrum.network.thegraph.com/api/{api-key}/subgraphs/id/5gKxDMnBjv3ffBJ4r3zWD6VrpaYHiq9aUth39YCQXWEt
+  - name: Free — MCP Server
+    description: >-
+      Art Blocks MCP Server providing 21 AI agent tools for querying projects,
+      tokens, artists, features, mint eligibility, and generative script
+      scaffolding across Ethereum, Arbitrum, and Base. Uses OAuth 2.1 with
+      Dynamic Client Registration; supports Authorization Code + PKCE for
+      browser clients and Device Authorization flow for headless agents.
+    authentication: oauth2
+    rateLimit: per-user rate limits enforced (details unspecified)
+    cost: free
+    endpoints:
+      - https://mcp.artblocks.io/mcp
