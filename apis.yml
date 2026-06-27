@@ -237,9 +237,9 @@ common:
   url: rate-limits/art-blocks-rate-limits.yml
 - type: FinOps
   url: finops/art-blocks-finops.yml
-- type: JSONLd
+- type: JSONLD
   url: json-ld/art-blocks.json
-- type: Blogs
+- type: Blog
   url: blogs/blogs.json
 integrations:
 - name: Ethereum

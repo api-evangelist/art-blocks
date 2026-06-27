@@ -2,26 +2,37 @@
   "name": "Art Blocks Blogs",
   "description": "Blog and developer content feeds for Art Blocks.",
   "url": "https://www.artblocks.io",
+  "repo": "art-blocks",
   "created": "2026-06-13",
   "modified": "2026-06-13",
   "feeds": [
     {
       "name": "Art Blocks Blog",
+      "source": "https://www.artblocks.io/blog",
       "url": "https://www.artblocks.io/blog",
+      "feed_url": null,
       "type": "blog",
       "format": "html",
-      "last_fetched": null,
+      "last_fetched": "2026-06-21T17:00:00Z",
+      "saved": 0,
       "post_count": 0,
-      "posts": []
+      "posts": [],
+      "note": "https://www.artblocks.io/blog returns 404; no feed resolves at /feed/, /feed, /rss.xml, /blog/feed/; site is a JS app with no scrapeable post links."
     },
     {
       "name": "Art Blocks Developer Documentation",
+      "source": "https://docs.artblocks.io",
       "url": "https://docs.artblocks.io",
+      "feed_url": null,
       "type": "docs",
       "format": "html",
-      "last_fetched": null,
+      "last_fetched": "2026-06-21T17:00:00Z",
+      "saved": 0,
       "post_count": 0,
-      "posts": []
+      "posts": [],
+      "note": "Documentation site, not a blog feed."
     }
-  ]
+  ],
+  "fetched": "2026-06-21T17:00:00Z",
+  "post_count": 0
 }
