@@ -221,6 +221,8 @@ apis:
   - type: Capabilities
     url: https://docs.artblocks.io/developer/mcp-server/capabilities/
 common:
+- type: AgenticAccess
+  url: agentic-access/art-blocks-agentic-access.yml
 - type: DomainSecurity
   url: security/art-blocks-domain-security.yml
 - type: Website
