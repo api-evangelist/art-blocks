@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Art Blocks Generator Token Metadata API
+  description: Returns an iframe-able live view of the generative artwork associated with a given Art Blocks token. The live view runs the artist's on-chain script in the browser using the token's deterministic hash as a seed, producing the canonical on-chain artwork output. Useful for embedding live artwork in external applications and marketplaces.
+  version: 1.0.0
+  contact:
+    name: Art Blocks Developer Documentation
+    url: https://docs.artblocks.io/developer/token-and-generator-apis/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://generator.artblocks.io
+  description: Production (Ethereum, Arbitrum One, Base)
+- url: https://generator.staging.artblocks.io
+  description: Staging (Sepolia testnet)
+tags:
+- name: Token Metadata
+  description: ERC-721 token metadata endpoints.
+paths:
+  /{chainId}/{contractAddress}/{tokenId}:
+    get:
+      operationId: getTokenMetadata
+      summary: Get token metadata
+      description: Returns ERC-721 token metadata for a given Art Blocks token, conforming to the OpenSea metadata standard. The response includes the live view URL (generator) and media proxy URL (static PNG) so integrators can obtain all asset links from a single call.
+      tags:
+      - Token Metadata
+      parameters:
+      - name: chainId
+        in: path
+        required: true
+        description: Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base.
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 42161
+          - 8453
+          example: 1
+      - name: contractAddress
+        in: path
+        required: true
+        description: Ethereum address of the Art Blocks core contract.
+        schema:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          example: '0x99a9b7c1116f9ceeb1652de04d5969cce509b069'
+      - name: tokenId
+        in: path
+        required: true
+        description: The ERC-721 token ID. For Art Blocks flagship contracts the token ID encodes the project ID (token_id = project_id * 1,000,000 + invocation).
+        schema:
+          type: integer
+          example: 385000000
+      responses:
+        '200':
+          description: ERC-721 token metadata conforming to the OpenSea metadata standard.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenMetadata'
+              example:
+                name: 'Chromie Squiggle #0'
+                description: Simple and easily understood, the Squiggle is a rendered depiction of a Bézier curve. This project is a homage to the soul of Art Blocks.
+                image: https://media-proxy.artblocks.io/1/0x059edd72cd353df5106d2b9cc5ab83a52287ac3a/0.png
+                animation_url: https://generator.artblocks.io/1/0x059edd72cd353df5106d2b9cc5ab83a52287ac3a/0
+                external_url: https://www.artblocks.io/token/1/0x059edd72cd353df5106d2b9cc5ab83a52287ac3a/0
+                attributes:
+                - trait_type: Color Palette
+                  value: Pipe Dream
+                - trait_type: Ends
+                  value: Flat
+                - trait_type: Steps
+                  value: '3'
+        '400':
+          description: Invalid token ID or contract address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Token not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    TokenMetadata:
+      type: object
+      description: ERC-721 token metadata conforming to the OpenSea metadata standard.
+      properties:
+        name:
+          type: string
+          description: Name of the token/artwork.
+        description:
+          type: string
+          description: Description of the artwork or project.
+        image:
+          type: string
+          format: uri
+          description: URL to the static PNG render from the Media Proxy API.
+        animation_url:
+          type: string
+          format: uri
+          description: URL to the live generative artwork view from the Generator API.
+        external_url:
+          type: string
+          format: uri
+          description: URL to the token detail page on artblocks.io.
+        attributes:
+          type: array
+          description: Computed feature traits for the token.
+          items:
+            $ref: '#/components/schemas/Attribute'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+    Attribute:
+      type: object
+      description: A trait attribute on the token.
+      required:
+      - trait_type
+      - value
+      properties:
+        trait_type:
+          type: string
+          description: Name of the trait.
+        value:
+          oneOf:
+          - type: string
+          - type: number
+          - type: boolean
+          description: Value of the trait.
+        display_type:
+          type: string
+          description: Optional display type hint (e.g., 'number', 'date').
+externalDocs:
+  description: Art Blocks Developer Documentation
+  url: https://docs.artblocks.io/developer/token-and-generator-apis/
