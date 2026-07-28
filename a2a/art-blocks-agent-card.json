@@ -1,0 +1,184 @@
+{
+  "name": "Art Blocks",
+  "description": "Art Blocks is the leading platform for generative art on the blockchain. Connect to discover projects, explore artist catalogs, look up token metadata, check minting availability, build purchase transactions, and query the full Art Blocks dataset via GraphQL.",
+  "version": "1.1.2",
+  "provider": {
+    "organization": "Art Blocks",
+    "url": "https://www.artblocks.io"
+  },
+  "documentationUrl": "https://docs.artblocks.io",
+  "protocols": [
+    {
+      "protocol": "MCP",
+      "url": "https://mcp.artblocks.io/mcp",
+      "transport": "streamable-http",
+      "authentication": {
+        "type": "oauth2",
+        "authorization_server": "https://mcp.artblocks.io",
+        "discovery_url": "https://mcp.artblocks.io/.well-known/oauth-authorization-server",
+        "grant_types": [
+          "authorization_code",
+          "urn:ietf:params:oauth:grant-type:device_code"
+        ]
+      }
+    }
+  ],
+  "skills": [
+    {
+      "id": "discover-projects",
+      "name": "Discover Projects",
+      "description": "Browse and search Art Blocks projects with filters for artist, vertical, tags, chain, and more. Supports pagination and sorting.",
+      "tags": [
+        "discovery",
+        "search",
+        "projects"
+      ],
+      "examples": [
+        "Find Art Blocks projects by artist Dmitri Cherniak",
+        "Show me recent Curated projects",
+        "What projects are tagged with 'geometry'?"
+      ]
+    },
+    {
+      "id": "live-mints",
+      "name": "Live Mints",
+      "description": "Find Art Blocks projects currently open for minting (remaining supply), launched within the last 12 months, with an indexed minter in metadata\u2014includes price, supply, and minter type. For older drops or unindexed minters, use discover projects or GraphQL.",
+      "tags": [
+        "minting",
+        "live",
+        "discovery"
+      ],
+      "examples": [
+        "What projects are currently minting on Art Blocks?",
+        "Are there any open Dutch auctions right now?"
+      ]
+    },
+    {
+      "id": "upcoming-releases",
+      "name": "Upcoming Releases",
+      "description": "Discover Art Blocks projects scheduled to launch in the future.",
+      "tags": [
+        "discovery",
+        "upcoming",
+        "calendar"
+      ],
+      "examples": [
+        "What Art Blocks drops are coming up this week?",
+        "Show me upcoming Curated releases"
+      ]
+    },
+    {
+      "id": "token-metadata",
+      "name": "Token Metadata",
+      "description": "Retrieve metadata for a specific Art Blocks token including traits, features, media URLs, and ownership info.",
+      "tags": [
+        "tokens",
+        "metadata",
+        "nft"
+      ],
+      "examples": [
+        "Get metadata for Chromie Squiggle #7583",
+        "What are the features of Fidenza #313?"
+      ]
+    },
+    {
+      "id": "artist-lookup",
+      "name": "Artist Lookup",
+      "description": "Look up an Art Blocks artist by name, slug, or wallet address and retrieve their project catalog.",
+      "tags": [
+        "artists",
+        "lookup"
+      ],
+      "examples": [
+        "Tell me about the artist Tyler Hobbs",
+        "What projects has Snowfro created?"
+      ]
+    },
+    {
+      "id": "wallet-portfolio",
+      "name": "Wallet Portfolio",
+      "description": "Get a high-level summary or detailed token list for an Art Blocks collector's wallet, including collection stats and valuations.",
+      "tags": [
+        "wallet",
+        "portfolio",
+        "collector"
+      ],
+      "examples": [
+        "What Art Blocks tokens does this wallet hold?",
+        "Show me a portfolio summary for vitalik.eth"
+      ]
+    },
+    {
+      "id": "purchase-transactions",
+      "name": "Purchase Transactions",
+      "description": "Build unsigned transactions to mint from set-price Art Blocks projects, with allowlist eligibility checks.",
+      "tags": [
+        "minting",
+        "transactions",
+        "purchase"
+      ],
+      "examples": [
+        "Build a mint transaction for project 450",
+        "Am I on the allowlist for this project?"
+      ]
+    },
+    {
+      "id": "graphql-query",
+      "name": "GraphQL Query",
+      "description": "Run raw or assisted GraphQL queries against the full Art Blocks Hasura endpoint. Includes schema introspection, query building, field validation, and optimization tools.",
+      "tags": [
+        "graphql",
+        "data",
+        "query"
+      ],
+      "examples": [
+        "Query all projects with more than 500 mints",
+        "What fields are available on the tokens_metadata table?"
+      ]
+    },
+    {
+      "id": "project-scaffold",
+      "name": "Project Scaffold",
+      "description": "Generate a starter template for building an Art Blocks generative art project using vanilla JS, p5.js, or Three.js.",
+      "tags": [
+        "creative-coding",
+        "scaffold",
+        "generative-art"
+      ],
+      "examples": [
+        "Scaffold a new Art Blocks project using p5.js",
+        "Create a Three.js starter for Art Blocks"
+      ]
+    },
+    {
+      "id": "postparams",
+      "name": "PostParams Configuration",
+      "description": "Discover and configure PostParam values on Art Blocks tokens \u2014 artist-defined parameters that collectors can modify after minting.",
+      "tags": [
+        "postparams",
+        "tokens",
+        "configuration"
+      ],
+      "examples": [
+        "What postparams are available on this token?",
+        "Build a transaction to set postparam values"
+      ]
+    },
+    {
+      "id": "postparam-hook-development",
+      "name": "PostParam Hook Development",
+      "description": "Design, write, test, deploy, and register custom Art Blocks PostParam hook contracts in Solidity \u2014 IPMPAugmentHook to inject live on-chain data into tokenData, IPMPConfigureHook to validate or gate collector param changes, or both.",
+      "tags": [
+        "postparams",
+        "hooks",
+        "solidity",
+        "creative-coding"
+      ],
+      "examples": [
+        "Write an augment hook that injects the token owner address into tokenData",
+        "Build a configure hook that requires the collector to own an NFT before setting params",
+        "Deploy and register a PostParam hook on Sepolia"
+      ]
+    }
+  ]
+}
