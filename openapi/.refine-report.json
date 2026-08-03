@@ -1,0 +1,18 @@
+{
+  "provider": "art-blocks",
+  "sources": [
+    "art-blocks-generator-api-openapi.yml",
+    "art-blocks-media-api-openapi.yml",
+    "art-blocks-token-metadata-api-openapi.yml"
+  ],
+  "outputs": [
+    "art-blocks-generator-api-openapi.yml",
+    "art-blocks-media-api-openapi.yml",
+    "art-blocks-token-metadata-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
