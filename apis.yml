@@ -152,7 +152,7 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.artblocks.io/developer/mcp-server/quick-start/
-  - type: MCP
+  - type: MCPServer
     url: https://mcp.artblocks.io/mcp
   - type: Skills
     url: https://docs.artblocks.io/developer/mcp-server/skills/
