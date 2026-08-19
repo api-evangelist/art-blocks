@@ -1,0 +1,268 @@
+{
+  "item": [
+    {
+      "id": "3a0ba4f6-43f2-4b7b-9526-f3418baeb22f",
+      "name": "Generator",
+      "description": {
+        "content": "Live generative artwork view endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "633ab9b5-d081-4854-a89c-939264ae244a",
+          "name": "Get live generative artwork view",
+          "request": {
+            "name": "Get live generative artwork view",
+            "description": {
+              "content": "Returns an HTML page containing the live generative artwork for a given token, suitable for embedding in an iframe. The page executes the artist's on-chain script in the browser using the token's deterministic hash as the PRNG seed. This is the canonical live view of the artwork as defined by the on-chain contract.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainId",
+                ":contractAddress",
+                ":tokenId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainId",
+                  "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contractAddress",
+                  "description": "(Required) Ethereum address of the Art Blocks core contract."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "tokenId",
+                  "description": "(Required) The ERC-721 token ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ab2d479-5ec1-422e-be6b-fccf64f5d95d",
+              "name": "HTML page rendering the live generative artwork. Suitable for use as an iframe src.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainId",
+                    ":contractAddress",
+                    ":tokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainId",
+                      "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contractAddress",
+                      "description": "(Required) Ethereum address of the Art Blocks core contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tokenId",
+                      "description": "(Required) The ERC-721 token ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfe95a6d-b98d-4053-8776-79f257d93213",
+              "name": "Invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainId",
+                    ":contractAddress",
+                    ":tokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainId",
+                      "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contractAddress",
+                      "description": "(Required) Ethereum address of the Art Blocks core contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tokenId",
+                      "description": "(Required) The ERC-721 token ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "663b2574-91c8-4661-9533-0840462ccc5b",
+              "name": "Token not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainId",
+                    ":contractAddress",
+                    ":tokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainId",
+                      "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contractAddress",
+                      "description": "(Required) Ethereum address of the Art Blocks core contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tokenId",
+                      "description": "(Required) The ERC-721 token ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://generator.artblocks.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "88526821-ec56-4960-85dd-7d382ed66494",
+    "name": "Art Blocks Generator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Returns an iframe-able live view of the generative artwork associated with a given Art Blocks token. The live view runs the artist's on-chain script in the browser using the token's deterministic hash as a seed, producing the canonical on-chain artwork output. Useful for embedding live artwork in external applications and marketplaces.\n\nContact Support:\n Name: Art Blocks Developer Documentation",
+      "type": "text/plain"
+    }
+  }
+}

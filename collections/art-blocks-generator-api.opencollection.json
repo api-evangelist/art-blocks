@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Art Blocks Generator API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get live generative artwork view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://generator.artblocks.io/:chainId/:contractAddress/:tokenId",
+            "params": [
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path",
+                "description": "Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+              },
+              {
+                "name": "contractAddress",
+                "value": "",
+                "type": "path",
+                "description": "Ethereum address of the Art Blocks core contract."
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The ERC-721 token ID."
+              }
+            ]
+          },
+          "docs": "Returns an HTML page containing the live generative artwork for a given token, suitable for embedding in an iframe. The page executes the artist's on-chain script in the browser using the token's deterministic hash as the PRNG seed. This is the canonical live view of the artwork as defined by the on-chain contract."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

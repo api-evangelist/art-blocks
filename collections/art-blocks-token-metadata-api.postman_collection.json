@@ -1,0 +1,268 @@
+{
+  "item": [
+    {
+      "id": "704c18b6-9d17-429f-bad1-dfa281f142e2",
+      "name": "Token Metadata",
+      "description": {
+        "content": "ERC-721 token metadata endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "521a44d2-5d06-4443-8585-016cbdd2b25b",
+          "name": "Get token metadata",
+          "request": {
+            "name": "Get token metadata",
+            "description": {
+              "content": "Returns ERC-721 token metadata for a given Art Blocks token, conforming to the OpenSea metadata standard. The response includes the live view URL (generator) and media proxy URL (static PNG) so integrators can obtain all asset links from a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainId",
+                ":contractAddress",
+                ":tokenId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainId",
+                  "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contractAddress",
+                  "description": "(Required) Ethereum address of the Art Blocks core contract."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "tokenId",
+                  "description": "(Required) The ERC-721 token ID. For Art Blocks flagship contracts the token ID encodes the project ID (token_id = project_id * 1,000,000 + invocation)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d443eeee-1f87-4a03-b6eb-5b71c7cea9c1",
+              "name": "ERC-721 token metadata conforming to the OpenSea metadata standard.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainId",
+                    ":contractAddress",
+                    ":tokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainId",
+                      "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contractAddress",
+                      "description": "(Required) Ethereum address of the Art Blocks core contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tokenId",
+                      "description": "(Required) The ERC-721 token ID. For Art Blocks flagship contracts the token ID encodes the project ID (token_id = project_id * 1,000,000 + invocation)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Chromie Squiggle #0\",\n  \"description\": \"Simple and easily understood, the Squiggle is a rendered depiction of a Bézier curve. This project is a homage to the soul of Art Blocks.\",\n  \"image\": \"https://media-proxy.artblocks.io/1/0x059edd72cd353df5106d2b9cc5ab83a52287ac3a/0.png\",\n  \"animation_url\": \"https://generator.artblocks.io/1/0x059edd72cd353df5106d2b9cc5ab83a52287ac3a/0\",\n  \"external_url\": \"https://www.artblocks.io/token/1/0x059edd72cd353df5106d2b9cc5ab83a52287ac3a/0\",\n  \"attributes\": [\n    {\n      \"trait_type\": \"Color Palette\",\n      \"value\": \"Pipe Dream\"\n    },\n    {\n      \"trait_type\": \"Ends\",\n      \"value\": \"Flat\"\n    },\n    {\n      \"trait_type\": \"Steps\",\n      \"value\": \"3\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15874270-f05c-4be1-a7f3-5522373ce5ce",
+              "name": "Invalid token ID or contract address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainId",
+                    ":contractAddress",
+                    ":tokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainId",
+                      "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contractAddress",
+                      "description": "(Required) Ethereum address of the Art Blocks core contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tokenId",
+                      "description": "(Required) The ERC-721 token ID. For Art Blocks flagship contracts the token ID encodes the project ID (token_id = project_id * 1,000,000 + invocation)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab7b423c-4def-444c-a639-9d4079bdb686",
+              "name": "Token not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainId",
+                    ":contractAddress",
+                    ":tokenId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainId",
+                      "description": "(Required) Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contractAddress",
+                      "description": "(Required) Ethereum address of the Art Blocks core contract."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "tokenId",
+                      "description": "(Required) The ERC-721 token ID. For Art Blocks flagship contracts the token ID encodes the project ID (token_id = project_id * 1,000,000 + invocation)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://generator.artblocks.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e8aa77a5-3ba2-47a0-8d02-865f0b54f7f1",
+    "name": "Art Blocks Generator Token Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Returns an iframe-able live view of the generative artwork associated with a given Art Blocks token. The live view runs the artist's on-chain script in the browser using the token's deterministic hash as a seed, producing the canonical on-chain artwork output. Useful for embedding live artwork in external applications and marketplaces.\n\nContact Support:\n Name: Art Blocks Developer Documentation",
+      "type": "text/plain"
+    }
+  }
+}

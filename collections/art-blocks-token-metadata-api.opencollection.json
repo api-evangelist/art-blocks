@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Art Blocks Generator Token Metadata API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get token metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://generator.artblocks.io/:chainId/:contractAddress/:tokenId",
+            "params": [
+              {
+                "name": "chainId",
+                "value": "",
+                "type": "path",
+                "description": "Chain ID of the network. Use 1 for Ethereum, 42161 for Arbitrum One, 8453 for Base."
+              },
+              {
+                "name": "contractAddress",
+                "value": "",
+                "type": "path",
+                "description": "Ethereum address of the Art Blocks core contract."
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The ERC-721 token ID. For Art Blocks flagship contracts the token ID encodes the project ID (token_id = project_id * 1,000,000 + invocation)."
+              }
+            ]
+          },
+          "docs": "Returns ERC-721 token metadata for a given Art Blocks token, conforming to the OpenSea metadata standard. The response includes the live view URL (generator) and media proxy URL (static PNG) so integrators can obtain all asset links from a single call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
