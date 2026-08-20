@@ -49,6 +49,16 @@ apis:
   baseURL: https://data.artblocks.io
   tags:
   - GraphQL
+  - Project
+  - Tokens
+  - Artists
+  - Features
+  - Minting
+  - Ethereum
+  - Arbitrum
+  - Base
+  tags_raw:
+  - GraphQL
   - Projects
   - Tokens
   - Artists
@@ -77,6 +87,12 @@ apis:
   - Subgraph
   - The Graph
   - Ethereum
+  - Onchain
+  tags_raw:
+  - GraphQL
+  - Subgraph
+  - The Graph
+  - Ethereum
   - On-Chain
   properties:
   - type: Documentation
@@ -94,6 +110,12 @@ apis:
   humanURL: https://thegraph.com/explorer/subgraphs/5WwGsBwJ2hVBpc3DphX4VHVMsoPnRkVkuZF4HTArZjCm
   baseURL: https://gateway-arbitrum.network.thegraph.com
   tags:
+  - GraphQL
+  - Subgraph
+  - The Graph
+  - Arbitrum
+  - Onchain
+  tags_raw:
   - GraphQL
   - Subgraph
   - The Graph
@@ -119,6 +141,12 @@ apis:
   - Subgraph
   - The Graph
   - Base
+  - Onchain
+  tags_raw:
+  - GraphQL
+  - Subgraph
+  - The Graph
+  - Base
   - On-Chain
   properties:
   - type: Documentation
@@ -140,6 +168,16 @@ apis:
   humanURL: https://docs.artblocks.io/developer/mcp-server/quick-start/
   baseURL: https://mcp.artblocks.io
   tags:
+  - MCP
+  - AI Agent
+  - GraphQL
+  - Minting
+  - Generative Art
+  - Authentication
+  - Ethereum
+  - Arbitrum
+  - Base
+  tags_raw:
   - MCP
   - AI Agent
   - GraphQL
