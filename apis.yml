@@ -99,7 +99,7 @@ apis:
   - Subgraph
   - The Graph
   - Ethereum
-  - On-Chain
+  - Onchain
   tags_raw:
   - GraphQL
   - Subgraph
@@ -126,7 +126,7 @@ apis:
   - Subgraph
   - The Graph
   - Arbitrum
-  - On-Chain
+  - Onchain
   tags_raw:
   - GraphQL
   - Subgraph
@@ -153,7 +153,7 @@ apis:
   - Subgraph
   - The Graph
   - Base
-  - On-Chain
+  - Onchain
   tags_raw:
   - GraphQL
   - Subgraph
