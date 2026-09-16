@@ -249,20 +249,6 @@ apis:
     url: https://docs.artblocks.io/developer/token-and-generator-apis/
   - type: GraphQL
     url: graphql/art-blocks-graphql.md
-- aid: art-blocks:art-blocks-token-metadata-api
-  name: Art Blocks Token Metadata API
-  description: ERC-721 token metadata endpoints.
-  humanURL: https://docs.artblocks.io/developer/token-and-generator-apis/
-  baseURL: https://token.artblocks.io
-  tags:
-  - Token Metadata
-  properties:
-  - type: OpenAPI
-    url: openapi/art-blocks-token-metadata-api-openapi.yml
-  - type: Documentation
-    url: https://docs.artblocks.io/developer/token-and-generator-apis/
-  - type: GraphQL
-    url: graphql/art-blocks-graphql.md
 common:
 - type: AgentCard
   url: a2a/art-blocks-a2a.yml
