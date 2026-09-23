@@ -1,18 +1,26 @@
 {
   "provider": "art-blocks",
   "sources": [
-    "art-blocks-generator-api-openapi.yml",
-    "art-blocks-media-api-openapi.yml",
-    "art-blocks-token-metadata-api-openapi.yml"
+    "_original/art-blocks-generator-api.json",
+    "_original/art-blocks-media-proxy-api.json"
   ],
   "outputs": [
     "art-blocks-generator-api-openapi.yml",
-    "art-blocks-media-api-openapi.yml",
-    "art-blocks-token-metadata-api-openapi.yml"
+    "art-blocks-media-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "art-blocks-generator-api.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "art-blocks-media-proxy-api.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/art-blocks-token-api.json: archived document superseded by a larger archived document",
+    "art-blocks-generator-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "art-blocks-media-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

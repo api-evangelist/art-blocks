@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Art Blocks Generator Media API
-  description: Returns an iframe-able live view of the generative artwork associated with a given Art Blocks token. The live view runs the artist's on-chain script in the browser using the token's deterministic hash as a seed, producing the canonical on-chain artwork output. Useful for embedding live artwork in external applications and marketplaces.
+  title: Art Blocks Proxy Media API
+  description: Serves static PNG renders of Art Blocks token artwork captured by a headless browser. These are the canonical static images used on the Art Blocks platform and by NFT marketplaces. Images are accessible at a predictable URL pattern keyed by chain ID, contract address, and token ID.
   version: 1.0.0
   contact:
     name: Art Blocks Developer Documentation
@@ -10,9 +10,9 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-- url: https://generator.artblocks.io
+- url: https://media-proxy.artblocks.io
   description: Production (Ethereum, Arbitrum One, Base)
-- url: https://generator.staging.artblocks.io
+- url: https://media-proxy.staging.artblocks.io
   description: Staging (Sepolia testnet)
 tags:
 - name: Media
