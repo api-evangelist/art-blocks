@@ -56,7 +56,7 @@ tags:
 - MCP
 - A2A
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 x-category: NFT
 x-tier: 1
@@ -251,6 +251,8 @@ apis:
   - type: GraphQL
     url: graphql/art-blocks-graphql.md
 common:
+- url: https://www.artblocks.io/articles
+  type: Blog
 - type: AgentCard
   url: a2a/art-blocks-a2a.yml
   name: A2A Agent Card
