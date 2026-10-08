@@ -64,3 +64,33 @@ plans:
     cost: free
     endpoints:
       - https://mcp.artblocks.io/mcp
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Free — Token, Generator, and Media Proxy APIs
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Free — Hasura GraphQL API
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Free — The Graph Subgraph
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Free — MCP Server
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
