@@ -64,33 +64,138 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Art Blocks is the leading on-chain generative art platform where artists deploy deterministic algorithms to Ethereum, Arbitrum One, and Base. Each token is minted by invoking the on-chain script with a unique hash, producing a provably unique artwork stored permanently on the blockchain.
+Art Blocks is the leading on-chain generative art platform where artists deploy deterministic code to Ethereum, Arbitrum One, and Base; each token is minted by invoking the script with a unique hash, producing a one-of-a-kind artwork stored permanently on-chain. The platform exposes four public API surfaces: a Token API that returns ERC-721 metadata conforming to the OpenSea standard, a Generator API that serves an iframe-able live view of each artwork, a Media Proxy API that provides static PNG renders, and a Hasura GraphQL API (data.artblocks.io) that gives structured access to on-chain and off-chain data including projects, tokens, artists, features, minting configuration, and ownership. Decentralised access is available through The Graph subgraph for on-chain-only data across all three networks. An MCP Server with 21 tools enables AI-agent integration for querying, minting, and generative script scaffolding.
 
-## APIs
+**Areas:** Generative Art · NFT · On-Chain Art · Blockchain · Ethereum · Arbitrum · Base · GraphQL · Token Metadata · Web3 · Smart Contracts · The Graph
 
-| API | Base URL | Auth |
-|-----|----------|------|
-| Token API | `https://token.artblocks.io/{chainID}/{contractAddress}/{tokenID}` | None |
-| Generator API | `https://generator.artblocks.io/{chainID}/{contractAddress}/{tokenID}` | None |
-| Media Proxy API | `https://media-proxy.artblocks.io/{chainID}/{contractAddress}/{tokenID}.png` | None |
-| Hasura GraphQL API | `https://data.artblocks.io/v1/graphql` | JWT |
-| Subgraph (Ethereum) | The Graph Network | API Key |
-| Subgraph (Arbitrum) | The Graph Network | API Key |
-| Subgraph (Base) | The Graph Network | API Key |
-| MCP Server | `https://mcp.artblocks.io/mcp` | OAuth 2.1 |
+## Art Blocks on APIs.io
 
-## Supported Networks
+Everything profiled for Art Blocks is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/art-blocks/](https://apis.io/providers/art-blocks/)** — or go straight to one of the APIs or properties below.
 
-- Ethereum (chain ID 1)
-- Arbitrum One (chain ID 42161)
-- Base (chain ID 8453)
-- Sepolia testnet (staging)
+### APIs (7)
 
-## Resources
+- [Art Blocks GraphQL API (Hasura)](https://apis.io/apis/art-blocks/graphql-api/) — Hasura-backed GraphQL API providing structured access to on-chain and off-chain Art Blocks data including projects, tokens, artists, contracts, minter…
+- [Art Blocks Subgraph — Ethereum](https://apis.io/apis/art-blocks/subgraph-ethereum/) — Decentralised subgraph on The Graph Network providing on-chain-only data for Art Blocks tokens, projects, and ownership on Ethereum mainnet. Uses camelCase…
+- [Art Blocks Subgraph — Arbitrum One](https://apis.io/apis/art-blocks/subgraph-arbitrum/) — Decentralised subgraph on The Graph Network providing on-chain-only data for Art Blocks tokens, projects, and ownership on Arbitrum One. Requires a…
+- [Art Blocks Subgraph — Base](https://apis.io/apis/art-blocks/subgraph-base/) — Decentralised subgraph on The Graph Network providing on-chain-only data for Art Blocks tokens, projects, and ownership on Base. Requires a developer API…
+- [Art Blocks MCP Server](https://apis.io/apis/art-blocks/mcp-server/) — Model Context Protocol server exposing 21 tools for AI agents to interact with the Art Blocks ecosystem across Ethereum, Arbitrum, and Base. Tools cover…
+- [Art Blocks Generator API](https://apis.io/apis/art-blocks/art-blocks-generator-api/) — Live generative artwork view endpoints.
+- [Art Blocks Media API](https://apis.io/apis/art-blocks/art-blocks-media-api/) — Static image media proxy endpoints.
 
-- Website: https://www.artblocks.io
-- Documentation: https://docs.artblocks.io
-- GitHub: https://github.com/ArtBlocks
-- Twitter: https://x.com/artblocks_io
-- Discord: https://discord.gg/artblocks
-- GraphQL Playground: https://cloud.hasura.io/public/graphiql?endpoint=https://data.artblocks.io/v1/graphql
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Art Blocks GraphQL API](https://apis.io/graphqls/art-blocks/art-blocks-graphql/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [mcp](https://apis.io/servers/art-blocks/mcp/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Art Blocks Agentic Access](https://apis.io/agentic-access/art-blocks/art-blocks-agentic-access/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Art Blocks Generator API](https://apis.io/collections/art-blocks/open-art-blocks-generator-api/)
+- [Art Blocks Generator Media API](https://apis.io/collections/art-blocks/open-art-blocks-media-api/)
+- [Art Blocks Generator Token Metadata API](https://apis.io/collections/art-blocks/open-art-blocks-token-metadata-api/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Art Blocks Domain Security](https://apis.io/security/art-blocks/art-blocks-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Art Blocks Plans](https://apis.io/plans/art-blocks/art-blocks-plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Art Blocks Rate Limits](https://apis.io/rate-limits/art-blocks/art-blocks-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Art Blocks Finops](https://apis.io/finops/art-blocks/art-blocks-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.artblocks.io)
+- [Documentation](https://docs.artblocks.io)
+- [Blog](https://www.artblocks.io/articles)
+- [GitHub](https://github.com/ArtBlocks)
+
+## API Evangelist rating
+
+**Kin Score 25.5** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.3 |
+| Contract quality | 50.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 20.2 |
+| Access clarity | 7.9 |
+
+**Agent readiness 57.8** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | flavored (partial credit) |
+| Dry Run Mode | na |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/art-blocks/](https://apis.io/providers/art-blocks/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Art Blocks: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/art-blocks/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
